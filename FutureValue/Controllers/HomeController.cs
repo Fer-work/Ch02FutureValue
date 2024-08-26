@@ -8,7 +8,6 @@ namespace FutureValue.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            ViewBag.Name = "Mary";
             ViewBag.FV = 0;
             return View();
         }
@@ -16,7 +15,14 @@ namespace FutureValue.Controllers
         [HttpPost]
         public IActionResult Index(FutureValueModel model)
         {
-            ViewBag.FV = model.CalculateFutureValue();
+            if (ModelState.IsValid)
+            {
+                ViewBag.FV = model.CalculateFutureValue();
+            }
+            else
+            {
+                ViewBag.FV = 0;
+            }
             return View(model);
         }
     }
